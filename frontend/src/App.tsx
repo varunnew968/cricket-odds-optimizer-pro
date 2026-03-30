@@ -119,12 +119,13 @@ export default function App() {
   const [currentOddsB, setCurrentOddsB] = useState(2.1);
   const [traderCapital, setTraderCapital] = useState(1000);
   const [predP1, setPredP1] = useState(0.61);
+  const [traderAmount, setTraderAmount] = useState(50);
 
   const addStake = (team: 'A' | 'B') => {
     const newStake: Stake = {
       id: Math.random().toString(36).substr(2, 9),
       team,
-      amount: 50,
+      amount: traderAmount,
       odds: team === 'A' ? currentOddsA : currentOddsB,
       timestamp: Date.now()
     };
@@ -452,9 +453,20 @@ export default function App() {
                             </tbody>
                          </table>
                       </div>
-                      <div className="p-3 bg-zinc-950 border-t border-white/5 grid grid-cols-2 gap-3">
-                         <button onClick={() => addStake('A')} className="py-2.5 bg-primary text-black rounded-lg font-black uppercase text-[10px] tracking-widest shadow-lg active:scale-95 transition-transform shadow-primary/20">Add RR (A)</button>
-                         <button onClick={() => addStake('B')} className="py-2.5 bg-secondary text-black rounded-lg font-black uppercase text-[10px] tracking-widest shadow-lg active:scale-95 transition-transform shadow-secondary/20">Add CSK (B)</button>
+                      <div className="p-3 bg-zinc-950 border-t border-white/5 flex flex-col gap-3">
+                         <div className="flex flex-col gap-1.5 px-1">
+                            <label className="text-[8px] font-black uppercase tracking-widest text-zinc-500 italic">Amount to Place (Hedge)</label>
+                            <div className="relative">
+                               <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                                  <span className="text-secondary text-xs font-black">₹</span>
+                               </div>
+                               <input type="number" value={traderAmount || ''} onChange={e => setTraderAmount(+e.target.value)} className="w-full bg-zinc-900/50 text-white text-lg font-black pl-8 pr-4 py-2 rounded-xl border border-white/10 focus:border-secondary/40 outline-none transition-all shadow-inner" placeholder="0" />
+                            </div>
+                         </div>
+                         <div className="grid grid-cols-2 gap-3">
+                            <button onClick={() => addStake('A')} className="py-2.5 bg-primary text-black rounded-lg font-black uppercase text-[10px] tracking-widest shadow-lg active:scale-95 transition-transform shadow-primary/20">Add RR (A)</button>
+                            <button onClick={() => addStake('B')} className="py-2.5 bg-secondary text-black rounded-lg font-black uppercase text-[10px] tracking-widest shadow-lg active:scale-95 transition-transform shadow-secondary/20">Add CSK (B)</button>
+                         </div>
                       </div>
                    </div>
                  )}
@@ -553,7 +565,11 @@ export default function App() {
                        <Zap className="w-5 h-5 text-primary" />
                        <h2 className="text-lg font-black uppercase tracking-tighter italic text-white/90">Position Stack</h2>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex items-center gap-2 lg:gap-4">
+                       <div className="relative group/input hidden md:block">
+                          <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[10px] font-black text-zinc-500">₹</span>
+                          <input type="number" value={traderAmount || ''} onChange={e => setTraderAmount(+e.target.value)} className="w-24 bg-zinc-950/80 border border-white/10 rounded-lg pl-6 pr-2 py-1.5 text-xs font-black text-white focus:border-secondary/50 outline-none transition-all shadow-inner" placeholder="Amt" />
+                       </div>
                        <button onClick={() => addStake('A')} className="px-4 py-1.5 bg-primary/10 text-primary border border-primary/20 rounded-lg text-xs font-black hover:bg-primary hover:text-black transition-all shadow-lg active:scale-95">Add RR (A)</button>
                        <button onClick={() => addStake('B')} className="px-4 py-1.5 bg-secondary/10 text-secondary border border-secondary/20 rounded-lg text-xs font-black hover:bg-secondary hover:text-black transition-all shadow-lg active:scale-95">Add CSK (B)</button>
                     </div>
