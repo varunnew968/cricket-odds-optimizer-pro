@@ -14,18 +14,6 @@ const teamLogos: { [key: string]: string } = {
   GT: "/logos/gt.png"
 };
 
-const teamColors: { [key: string]: string } = {
-  CSK: 'from-yellow-400 to-yellow-600',
-  MI: 'from-blue-500 to-blue-700',
-  RCB: 'from-red-500 to-red-700',
-  RR: 'from-pink-500 to-pink-700',
-  SRH: 'from-orange-500 to-orange-700',
-  KKR: 'from-purple-600 to-purple-800',
-  DC: 'from-blue-400 to-blue-600',
-  PBKS: 'from-red-400 to-red-600',
-  LSG: 'from-cyan-400 to-cyan-600',
-  GT: 'from-slate-600 to-slate-800'
-};
 
 interface MatchDisplayCardProps {
   team1: string;
@@ -39,7 +27,6 @@ export default function MatchDisplayCard({ team1, team2, status, subStatus }: Ma
 
   const renderLogo = (team: string) => {
     const logoUrl = teamLogos[team] || "/logos/fallback.png";
-    const colorClass = teamColors[team] || 'from-zinc-700 to-zinc-900';
 
     return (
       <div className="flex flex-col items-center gap-2">

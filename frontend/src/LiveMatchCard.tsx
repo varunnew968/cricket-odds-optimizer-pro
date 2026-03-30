@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Activity, Radio, Clock, ChevronRight, Lock, Unlock, Calendar } from 'lucide-react';
+import { Activity, Radio, Clock, Lock, Unlock, Calendar } from 'lucide-react';
 import scheduleData from './data/ipl_schedule.json';
 
 const teamLogos: { [key: string]: string } = {
